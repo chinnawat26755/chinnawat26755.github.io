@@ -5,8 +5,8 @@ $username = 'fiw_cnw';
 $password = 'ChinnawatAoumkaew01';
 
 try {
-    $conn = new PDO("sqlsrv:server=$host;Database=$dbName", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $condb = new PDO("sqlsrv:server=$host;Database=$dbName", $username, $password);
+    $condb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
