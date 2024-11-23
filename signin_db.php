@@ -1,55 +1,41 @@
 <?php
-    session_start();
-    require_once 'config/condb.php';
+session_start();
+include('db_connection.php');  // เชื่อมต่อฐานข้อมูล
 
-    if (isset($_POST['signin'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+// ตรวจสอบว่ามีการส่งข้อมูลมาจากฟอร์มหรือไม่
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    // รับข้อมูลจากฟอร์ม
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-        if (empty($email)) {
-            $_SESSION['error'] = 'กรุณากรอกอีเมล';
-            header("location: signin.php");
-        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
-            header("location: signin.php");
-        } else if (empty($password)) {
-            $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
-            header("location: signin.php");
-        } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-            $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
-            header("location: signin.php");
+    try {
+        // คำสั่ง SQL เพื่อดึงข้อมูลผู้ใช้ที่มีอีเมลตรงกัน
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $condb->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // ตรวจสอบว่ามีผู้ใช้หรือไม่ และตรวจสอบรหัสผ่าน
+        if ($user && password_verify($password, $user['password'])) {
+            // ถ้าผ่านการตรวจสอบเข้าสู่ระบบสำเร็จ
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['firstname'] = $user['firstname'];
+            $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['email'] = $user['email'];
+            header("Location: dashboard.php");  // เปลี่ยนไปยังหน้าหลังเข้าสู่ระบบ
+            exit;
         } else {
-            try {
-                $check_data = $condb->prepare("SELECT * FROM users WHERE email = :email");
-                $check_data->bindParam(":email", $email);
-                $check_data->execute();
-                $row = $check_data->fetch(PDO::FETCH_ASSOC);
-
-                if ($check_data->rowCount() > 0) {
-                    if ($email == $row['email']) {
-                        if (password_verify($password, $row['password'])) {
-                            if ($row['urole'] == 'admin') {
-                                $_SESSION['admin_login'] = $row['id'];
-                                header("location: admin.php");
-                            } else {
-                                $_SESSION['user_login'] = $row['id'];
-                                header("location: user.php");
-                            }
-                        } else {
-                            $_SESSION['error'] = 'รหัสผ่านผิด';
-                            header("location: signin.php");
-                        }
-                    } else {
-                        $_SESSION['error'] = 'อีเมลผิด';
-                        header("location: signin.php");
-                    }
-                } else {
-                    $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
-                    header("location: signin.php");
-                }
-            } catch(PDOException $e) {
-                echo $e->getMessage();
-            }
+            // ถ้ารหัสผ่านไม่ถูกต้อง
+            echo "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
         }
+    } catch (PDOException $e) {
+        // ถ้ามีข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล
+        die("Error: " . $e->getMessage());
     }
+} else {
+    // ถ้าไม่มีการส่งข้อมูลมาจากฟอร์ม
+    echo "กรุณากรอกข้อมูลให้ครบถ้วน";
+}
 ?>
