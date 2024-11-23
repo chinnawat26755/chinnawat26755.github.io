@@ -50,7 +50,7 @@
           </div>
         </form>
         <p class="mb-0">
-          <a href="index.php" class="text-center">สมัครสมาชิก?</a>
+          <a href="register.php" class="text-center">สมัครสมาชิก?</a>
         </p>
       </div>
     </div>
