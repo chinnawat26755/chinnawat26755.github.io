@@ -9,13 +9,13 @@ if (isset($_POST['signin'])) {
     // ตรวจสอบข้อมูลที่กรอกมา
     if (empty($firstname)) {
         $_SESSION['error'] = 'กรุณากรอกชื่อ';
-        header("location: signin.php");
+        header("location: register.php");
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
-        header("location: signin.php");
+        header("location: register.php");
     } else if (strlen($password) > 20 || strlen($password) < 5) {
         $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
-        header("location: signin.php");
+        header("location: register.php");
     } else {
         try {
             // ตรวจสอบการมีอยู่ของชื่อจริงในฐานข้อมูล
@@ -34,11 +34,11 @@ if (isset($_POST['signin'])) {
                         header("location: /mywebsite/admin/index.php"); // ไปหน้า user หรือหน้าอื่นๆ ที่ต้องการ
                     } else {
                         $_SESSION['error'] = 'รหัสผ่านผิด';
-                        header("location: signin.php"); // กลับไปหน้า signin
+                        header("location: register.php"); // กลับไปหน้า signin
                     }
                 } else {
                     $_SESSION['error'] = 'ชื่อจริงผิด';
-                    header("location: signin.php"); // กลับไปหน้า signin
+                    header("location: register.php"); // กลับไปหน้า signin
                 }
             } else {
                 $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
