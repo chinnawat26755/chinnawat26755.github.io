@@ -27,15 +27,16 @@
         <?php } ?>
         <form action="signin_db.php" method="post">
           <div class="input-group mb-3">
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <!-- เปลี่ยนจาก email เป็น firstname -->
+            <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+                <span class="fas fa-user"></span>
               </div>
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
