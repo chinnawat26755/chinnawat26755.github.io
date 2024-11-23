@@ -1,10 +1,7 @@
 <?php 
-
     session_start();
     require_once 'config/condb.php';
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
     <div class="container">
         <h3 class="mt-4">สมัครสมาชิก</h3>
         <hr>
@@ -44,7 +40,6 @@
                     ?>
                 </div>
             <?php } ?>
-
             <div class="mb-3">
                 <label for="firstname" class="form-label">First name</label>
                 <input type="text" class="form-control" name="firstname" aria-describedby="firstname">
@@ -70,6 +65,5 @@
         <hr>
         <p>เป็นสมาชิกแล้วใช่ไหม คลิ๊กที่นี่เพื่อ <a href="signin.php">เข้าสู่ระบบ</a></p>
     </div>
-    
 </body>
 </html>
