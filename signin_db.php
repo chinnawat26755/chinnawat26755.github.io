@@ -1,5 +1,4 @@
-<?php 
-
+<?php
     session_start();
     require_once 'config/condb.php';
 
@@ -7,7 +6,6 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-      
         if (empty($email)) {
             $_SESSION['error'] = 'กรุณากรอกอีเมล';
             header("location: signin.php");
@@ -22,16 +20,14 @@
             header("location: signin.php");
         } else {
             try {
-
                 $check_data = $condb->prepare("SELECT * FROM users WHERE email = :email");
                 $check_data->bindParam(":email", $email);
                 $check_data->execute();
                 $row = $check_data->fetch(PDO::FETCH_ASSOC);
 
                 if ($check_data->rowCount() > 0) {
-
                     if ($email == $row['email']) {
-                        if (password_verify($password, $row['password'])) {
+                        if (password_verify($password, $row['password'])) {  // ถ้ารหัสผ่านถูกเข้ารหัส
                             if ($row['urole'] == 'admin') {
                                 $_SESSION['admin_login'] = $row['id'];
                                 header("location: admin.php");
@@ -51,12 +47,9 @@
                     $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
                     header("location: signin.php");
                 }
-
             } catch(PDOException $e) {
                 echo $e->getMessage();
             }
         }
     }
-
-
 ?>
