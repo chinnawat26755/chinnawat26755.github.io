@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css?v=3.2.0">
+  <link rel="icon" href="/assets/dist/img/AdminLTELogo.png">
 </head>
 <body class="hold-transition login-page">
   <div class="login-box">
