@@ -42,7 +42,7 @@ if (isset($_POST['signin'])) {
                 }
             } else {
                 $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
-                header("location: signin.php"); // กลับไปหน้า signin
+                header("location: /mywebsite/admin/index.php"); // กลับไปหน้า signin
             }
         } catch(PDOException $e) {
             // แสดงข้อความ error หากเกิดปัญหากับฐานข้อมูล
