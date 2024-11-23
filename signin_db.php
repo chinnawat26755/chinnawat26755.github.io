@@ -3,14 +3,11 @@
     require_once 'config/condb.php';
 
     if (isset($_POST['signin'])) {
-        $email = $_POST['email'];
+        $firstname = $_POST['firstname'];  // เปลี่ยนเป็น firstname แทน email
         $password = $_POST['password'];
 
-        if (empty($email)) {
-            $_SESSION['error'] = 'กรุณากรอกอีเมล';
-            header("location: signin.php");
-        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
+        if (empty($firstname)) {
+            $_SESSION['error'] = 'กรุณากรอกชื่อ';
             header("location: signin.php");
         } else if (empty($password)) {
             $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
@@ -20,27 +17,29 @@
             header("location: signin.php");
         } else {
             try {
-                $check_data = $condb->prepare("SELECT * FROM users WHERE email = :email");
-                $check_data->bindParam(":email", $email);
+                // ตรวจสอบการมีอยู่ของชื่อจริง
+                $check_data = $condb->prepare("SELECT * FROM users WHERE firstname = :firstname");
+                $check_data->bindParam(":firstname", $firstname);
                 $check_data->execute();
                 $row = $check_data->fetch(PDO::FETCH_ASSOC);
 
                 if ($check_data->rowCount() > 0) {
-                    if ($email == $row['email']) {
-                        if (password_verify($password, $row['password'])) {
+                    // ถ้ามีชื่อจริงตรงกัน
+                    if ($firstname == $row['firstname']) {
+                        if (password_verify($password, $row['password'])) {  // ถ้ารหัสผ่านถูกต้อง
                             if ($row['urole'] == 'admin') {
                                 $_SESSION['admin_login'] = $row['id'];
                                 header("location: admin.php");
                             } else {
                                 $_SESSION['user_login'] = $row['id'];
-                                header("location: user.php");
+                                header("location: /mywebsite/admin/index.php");
                             }
                         } else {
                             $_SESSION['error'] = 'รหัสผ่านผิด';
                             header("location: signin.php");
                         }
                     } else {
-                        $_SESSION['error'] = 'อีเมลผิด';
+                        $_SESSION['error'] = 'ชื่อจริงผิด';
                         header("location: signin.php");
                     }
                 } else {
