@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // บันทึกข้อมูลลงในฐานข้อมูล
     try {
+        // เปลี่ยน NOW() เป็น GETDATE() สำหรับ SQL Server
         $stmt = $condb->prepare("INSERT INTO emails (user_id, receiver_id, subject, body, date_sent) 
-                                 VALUES (:user_id, :receiver_id, :subject, :body, NOW())");
+                                 VALUES (:user_id, :receiver_id, :subject, :body, GETDATE())");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':receiver_id', $receiver_id, PDO::PARAM_INT);
         $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
