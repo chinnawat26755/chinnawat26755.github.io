@@ -27,13 +27,13 @@
 
                 if ($check_data->rowCount() > 0) {
                     if ($email == $row['email']) {
-                        if (password_verify($password, $row['password'])) {  // ถ้ารหัสผ่านถูกเข้ารหัส
+                        if (password_verify($password, $row['password'])) {
                             if ($row['urole'] == 'admin') {
                                 $_SESSION['admin_login'] = $row['id'];
                                 header("location: admin.php");
                             } else {
                                 $_SESSION['user_login'] = $row['id'];
-                                header("location: /mywebsite/admin/index.php");
+                                header("location: user.php");
                             }
                         } else {
                             $_SESSION['error'] = 'รหัสผ่านผิด';
