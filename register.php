@@ -63,7 +63,7 @@
             <button type="submit" name="signup" class="btn btn-primary">Sign Up</button>
         </form>
         <hr>
-        <p>เป็นสมาชิกแล้วใช่ไหม คลิ๊กที่นี่เพื่อ <a href="register.php">เข้าสู่ระบบ</a></p>
+        <p>เป็นสมาชิกแล้วใช่ไหม คลิ๊กที่นี่เพื่อ <a href="index.php">เข้าสู่ระบบ</a></p>
     </div>
 </body>
 </html>
