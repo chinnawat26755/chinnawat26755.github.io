@@ -9,15 +9,15 @@ if (isset($_POST['signin'])) {
     // ตรวจสอบข้อมูลที่กรอกมา
     if (empty($firstname)) {
         $_SESSION['error'] = 'กรุณากรอกชื่อ';
-        header("location: register.php");
+        header("location: index.php");
         exit();
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
-        header("location: register.php");
+        header("location: index.php");
         exit();
     } else if (strlen($password) > 20 || strlen($password) < 5) {
         $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
-        header("location: register.php");
+        header("location: index.php");
         exit();
     } else {
         try {
@@ -41,13 +41,13 @@ if (isset($_POST['signin'])) {
                 }
             } else {
                 $_SESSION['error'] = "ไม่มีข้อมูลในระบบ";
-                header("location: register.php");
+                header("location: index.php");
                 exit();
             }
         } catch (PDOException $e) {
             // แสดงข้อความ error หากเกิดปัญหากับฐานข้อมูล
             $_SESSION['error'] = "เกิดข้อผิดพลาด: " . $e->getMessage();
-            header("location: register.php");
+            header("location: index.php");
             exit();
         }
     }
