@@ -66,7 +66,7 @@
 
 
                 <li class="nav-item">
-                    <a href="../signin.php" class="nav-link">
+                    <a href="../index.php" class="nav-link">
                         <i class="nav-icon ion ion-power"></i> <!-- เปลี่ยนจาก ion-email เป็น ion-log-out -->
                         <p>Logout</p>
                     </a>
