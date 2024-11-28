@@ -36,7 +36,7 @@ if (isset($_POST['signin'])) {
                     exit();
                 } else {
                     $_SESSION['error'] = 'รหัสผ่านผิด';
-                    header("location: register.php");
+                    header("location: index.php");
                     exit();
                 }
             } else {
