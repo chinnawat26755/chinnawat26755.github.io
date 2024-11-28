@@ -54,7 +54,7 @@ if ($act == 'confirm_delete' && isset($_GET['id'])) {
                 title: "Email deleted successfully",
                 type: "success"
             }, function() {
-                window.location.href = "member_list.php";
+                window.location.href = "/admin/member.php";
             });
         </script>';
     } catch (PDOException $e) {
