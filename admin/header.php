@@ -33,6 +33,7 @@ require_once '../config/condb.php';
   <!-- SweetAlert -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  <link rel="icon" href="/assets/dist/img/AdminLTELogo.png">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
