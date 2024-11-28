@@ -32,7 +32,7 @@ if (isset($_POST['signin'])) {
                 if (password_verify($password, $row['password'])) {
                     // เก็บข้อมูลผู้ใช้ลง session
                     $_SESSION['user_login'] = $row['id'];
-                    header("location: /mywebsite/admin/index.php"); // เปลี่ยนไปหน้า admin
+                    header("location: /admin/index.php"); // เปลี่ยนไปหน้า admin
                     exit();
                 } else {
                     $_SESSION['error'] = 'รหัสผ่านผิด';
