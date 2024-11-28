@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 title: "Email sent successfully",
                 type: "success"
             }, function() {
-                window.location.href = "member_list.php";
+                window.location.href = "/admin/index.php";
             });
         </script>';
     } catch (PDOException $e) {
